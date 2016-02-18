@@ -62,7 +62,7 @@ _MainProc			PROC
 					; 10
 					mov eax, 000000ACEh
 					mov ecx, 000000FBDh
-					add ax, cx
+					sub ecx, eax
 
 					; 11
 					mov bx, 00001h
@@ -151,19 +151,19 @@ _MainProc			PROC
 					; 12
 					mov ax, -48
 					cwd
-					mov bl, 5
-					idiv bl
+					mov bx, 5
+					idiv bx
 
 					; 13
 					mov eax, -48
 					cdq
-					mov bx, 5
-					idiv bx
+					mov ebx, -5
+					idiv ebx
 
 					; 14
 					mov eax, 020002h
 					cdq
-					mov ebx, -5
+					mov ebx, 0100h
 					idiv ebx
 
 
