@@ -1,0 +1,6 @@
+# .gitignore
+
+HomeWork4/windows32/Debug/
+
+*.zip
+

@@ -1,0 +1,243 @@
+Microsoft (R) Macro Assembler Version 11.00.61030.0	    02/16/16 16:18:43
+main.asm						     Page 1 - 1
+
+
+				; FileName : main.asm
+				; Author : Norris, Joel R
+				; Date : 2016_02_08
+				; Project : Lab 2
+
+				; Assembler directives
+				.586				; accept instructions for 586
+				.MODEL FLAT			; generate code for flat memory
+				INCLUDE io.h		; header file for input / output
+			      C ; IO.H -- header file for I/O macros (listing suppressed)
+			      C .NOLIST      ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+				.STACK 4096			; reserve 4096-byte stack
+
+ 00000000			.DATA				; DATA section begins : reserve storage for data
+									; no storage for this lab, everything is done with immediates and registers
+									; results are obtained with debugging
+
+ 00000000			.CODE				; Code section begins
+ 00000000			_MainProc			PROC
+
+									; initialize registers
+ 00000000  B8 00000000							mov eax, 0;
+ 00000005  BB 00000000							mov ebx, 0;
+
+									; PART I
+									; 1
+ 0000000A  B0 7E							mov al, 07Eh
+ 0000000C  04 82							add al, 082h
+
+									; 2
+ 0000000E  B0 1E							mov al, 30
+ 00000010  2C 32							sub al,	50
+
+									; 3
+ 00000012  66| B8 00BD							mov ax, 0BDh
+ 00000016  04 43							add al, 67
+
+									; 4
+ 00000018  66| B8 00BD							mov ax, 0BDh
+ 0000001C  04 43							add al, 67
+
+									; 5
+ 0000001E  66| B8 00BD							mov ax, 0BDh
+ 00000022  04 43							add al, 67
+
+									; 6
+ 00000024  66| B8 FFFD							mov ax, -3
+ 00000028  80 C4 01							add ah, 1
+
+									; 7
+ 0000002B  B0 80							mov al, -128
+ 0000002D  2C 30							sub al, 48
+
+									; 8
+ 0000002F  66| B8 0FED							mov ax, 00FEDh
+ 00000033  66| B9 0867							mov cx, 00867h
+ 00000037  66| 03 C1							add ax, cx
+
+									; 9
+ 0000003A  66| B8 9ABC							mov ax, 09ABCh
+ 0000003E  66| B9 6BDF							mov cx, 06BDFh
+ 00000042  66| 03 C1							add ax, cx
+
+									; 10
+ 00000045  B8 00000ACE							mov eax, 000000ACEh
+ 0000004A  B9 00000FBD							mov ecx, 000000FBDh
+ 0000004F  66| 03 C1							add ax, cx
+
+									; 11
+ 00000052  66| BB 0001							mov bx, 00001h
+ 00000056  66| 4B							dec bx
+
+									; 12
+ 00000058  66| B9 7FFF							mov cx, 07FFFh
+
+ 0000005C  41								inc ecx
+
+									; 13
+ 0000005D  BB 7FFFFFFF							mov ebx, 07FFFFFFFh
+ 00000062  66| 43							inc bx
+
+									; 14
+ 00000064  66| B8 0009							mov ax, 00009h
+ 00000068  66| 40							inc ax
+
+									; 15
+ 0000006A  B8 00000007							mov eax, 000000007h
+ 0000006F  F7 D8							neg eax
+
+									; 16
+ 00000071  66| BA F0E0							mov dx, 0F0E0h
+ 00000075  F6 DA							neg dl
+
+									; PART II
+									; 1
+ 00000077  B0 08							mov al, 8
+ 00000079  B3 0A							mov bl, 10
+ 0000007B  F6 E3							mul bl
+
+									; 2
+ 0000007D  66| B8 0200							mov ax, 0200h
+ 00000081  66| B9 0200							mov cx, 0200h
+ 00000085  66| F7 E1							mul cx
+
+									; 3
+ 00000088  B8 30000000							mov eax, 030000000h
+ 0000008D  BB 00030000							mov ebx, 030000h
+ 00000092  F7 E3							mul ebx
+
+									; 4
+ 00000094  B0 0A							mov al, 10
+ 00000096  B3 04							mov bl, 4
+ 00000098  F6 EB							imul bl
+
+									; 5
+ 0000009A  B0 0A							mov al, 10
+ 0000009C  B3 FC							mov bl, -4
+ 0000009E  F6 EB							imul bl
+
+									; 6 
+ 000000A0  66| B8 0014							mov ax, 20
+ 000000A4  66| BB 000A							mov bx, 10
+ 000000A8  66| F7 EB							imul bx
+
+									; 7
+ 000000AB  66| B8 0030							mov ax, 48
+ 000000AF  B3 05							mov bl, 5
+ 000000B1  F6 F3							div bl
+
+									; 8
+ 000000B3  66| BA 0000							mov dx, 0
+ 000000B7  66| B8 0030							mov ax, 48
+ 000000BB  66| B9 0005							mov cx, 5
+ 000000BF  66| F7 F1							div cx
+
+									; 9
+ 000000C2  66| B8 FFD0							mov ax, -48
+ 000000C6  B3 05							mov bl, 5
+ 000000C8  F6 FB							idiv bl
+
+									; 10 
+ 000000CA  B4 00							mov ah, 0
+ 000000CC  B0 D0							mov al, -48
+ 000000CE  B3 05							mov bl, 5
+ 000000D0  F6 FB							idiv bl
+
+									; 11
+ 000000D2  B0 D0							mov al, -48
+ 000000D4  66| 98							cbw
+ 000000D6  B3 05							mov bl, 5
+ 000000D8  F6 FB							idiv bl
+
+									; 12
+ 000000DA  66| B8 FFD0							mov ax, -48
+ 000000DE  66| 99							cwd
+ 000000E0  B3 05							mov bl, 5
+ 000000E2  F6 FB							idiv bl
+
+									; 13
+ 000000E4  B8 FFFFFFD0							mov eax, -48
+ 000000E9  99								cdq
+ 000000EA  66| BB 0005							mov bx, 5
+ 000000EE  66| F7 FB							idiv bx
+
+									; 14
+ 000000F1  B8 00020002							mov eax, 020002h
+ 000000F6  99								cdq
+ 000000F7  BB FFFFFFFB							mov ebx, -5
+ 000000FC  F7 FB							idiv ebx
+
+
+
+
+
+									; program end				
+ 000000FE  B8 00000000							mov		eax, 0;				; exit w/ return code 0
+ 00000103  C3								ret
+ 00000104			_MainProc			ENDP						; end of main procedure
+									END							; end of source code
+									
+Microsoft (R) Macro Assembler Version 11.00.61030.0	    02/16/16 16:18:43
+main.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atow . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+wtoa . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000104 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000104 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_getInput  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_showOutput  . . . . . . . . . .	L Near	 00000000 FLAT	External
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atowproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   0 Errors
